@@ -26,7 +26,6 @@ fn main() {
     //let f = serde_json::from_str::<Root>(&fs::read_to_string("data.json").unwrap()).unwrap();
     let f: Root = serde_json::from_str(&response).unwrap();
     for e in f.events.into_iter() {
-        
         ranks.0 = e.competitions[0].competitors[0].curated_rank.current;
         ranks.1 = e.competitions[0].competitors[1].curated_rank.current;
 
@@ -36,7 +35,6 @@ fn main() {
             h.entry(e.name).or_insert(d);
         }
 
-        
         //println!("{:<12} on {}", e.short_name, d.format("%I:%M %p"));
     }
     let mut hash_vec: Vec<(&String, &DateTime<Local>)> = h.iter().collect();

@@ -29,7 +29,7 @@ fn main() {
         ranks.0 = e.competitions[0].competitors[0].curated_rank.current;
         ranks.1 = e.competitions[0].competitors[1].curated_rank.current;
 
-        if ranks.0 < 26 || ranks.1 < 26 {
+        if ranks.0 < 26 || ranks.1 < 26 || e.name.contains("Florida State Seminoles") {
             let naive = NaiveDateTime::parse_from_str(&e.date, "%Y-%m-%dT%H:%MZ").unwrap();
             let d: DateTime<Local> = Local.from_utc_datetime(&naive);
             h.entry(e.name).or_insert(d);

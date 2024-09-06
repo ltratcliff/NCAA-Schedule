@@ -1,5 +1,4 @@
 use serde::{Deserialize, Serialize};
-use serde_json::Value;
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -27,9 +26,23 @@ pub struct Competition {
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Competitor {
+    pub home_away: String,
+    pub winner: Option<bool>,
+    pub team: Team,
+    pub score: String,
     pub curated_rank: CuratedRank,
+
 }
 
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct Team {
+    pub location: String,
+    pub name: String,
+    pub abbreviation: String,
+    pub display_name: String,
+    pub short_display_name: String,
+}
 
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]

@@ -50,26 +50,38 @@ fn main() {
         let mut home_rank: i64 = 0;
         let mut away_rank: i64 = 0;
         for comps in e.competitions {
+            let mut home_won: bool = false;
+            let mut away_won: bool = false;
             for c in comps.competitors {
                 if c.home_away == "home" {
                     home_rank = c.curated_rank.current;
                     if let Some(true) = c.winner {
+                        home_won = true;
                         home_team = c.team.location.green();
                         home_score = c.score.green()
                     } else {
+                        home_won = false;
                         home_team = c.team.location.white();
-                        home_score = c.score.white()
+                        home_score = c.score.white();
                     }
                 } else if c.home_away == "away" {
                     away_rank = c.curated_rank.current;
                     if let Some(true) = c.winner {
+                        away_won = true;
                         away_team = c.team.location.green();
                         away_score = c.score.green()
                     } else {
+                        away_won = false;
                         away_team = c.team.location.white();
                         away_score = c.score.white();
                     }
                 }
+            }
+            if away_rank > home_rank && away_won  {
+                home_team = home_team.red()
+            }
+            if home_rank > away_rank && home_won {
+                away_team = away_team.red()
             }
             //println!("{:<12} on {}", e.short_name, d.format("%I:%M %p"));
         }
